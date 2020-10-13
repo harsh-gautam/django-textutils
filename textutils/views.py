@@ -8,25 +8,31 @@ def index(request):
 
 def analyze(request):
     dftext = request.GET.get('text', 'default')
-    removepunc_res = request.GET.get('removepunc', 'off')
-    upper_res = request.GET.get('uppercase', 'off')
-    print(dftext)
-    print(removepunc_res)
-    print(upper_res)
-    punctuations = ''',./;:'"[{]}'''
+    choice = request.GET.get('choice', 'off')
     analyze = ""
-    if removepunc_res == 'on':
-        if upper_res == 'on':
-            dftext = dftext.upper()
+    if choice == 'removepunc':
+        punctuations = '''"<!@#$%^&*()][}{;'.,/:?>'''
         for char in dftext:
             if char not in punctuations:
                 analyze += char
-
         params = {'purpose':'Remove Punctuations', 'analyzed_text': analyze}
-        return render(request, 'analyze.html', params)
-    elif upper_res == 'on':
+    elif choice == 'uppercase':
         analyze = dftext.upper()
         params = {'purpose': 'Uppercase', 'analyzed_text': analyze}
+    elif choice == 'removespace':
+        for index, char in enumerate(dftext):
+            if dftext[index] == ' ' and dftext[index+1] == ' ':
+                pass
+            else:
+                analyze += char
+        params = {'purpose': "Remove Extra Spaces", 'analyzed_text': analyze}
+    elif choice == 'charcount':
+            dftext_len = len(dftext)
+            char_count = {key: 0 for key in tuple(dftext)}
+            for char in dftext:
+                char_count[char] += 1
+            analyze = analyze + "Total Characters: " + str(dftext_len) + "\n Characters Count: " +  str(char_count)
+            params = {'purpose': "Counting Characters", 'analyzed_text': analyze}
     else:
         params = {'purpose': 'No Purpose', 'analyzed_text': "Select atleast one checkbox!!!"}
 
