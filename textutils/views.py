@@ -31,9 +31,9 @@ def analyze(request):
             char_count = {key: 0 for key in tuple(dftext)}
             for char in dftext:
                 char_count[char] += 1
-            analyze = analyze + "Total Characters: " + str(dftext_len) + "\n Characters Count: " +  str(char_count)
+            analyze = analyze + "Total Characters: " + str(dftext_len) + "\nCharacters Count: " +  str(char_count)
             params = {'purpose': "Counting Characters", 'analyzed_text': analyze}
     else:
-        params = {'purpose': 'No Purpose', 'analyzed_text': "Select atleast one checkbox!!!"}
+        params = {'purpose': '', 'analyzed_text': "Select atleast one checkbox!!!"}
 
     return render(request, 'analyze.html', params)
