@@ -31,25 +31,26 @@
         </div>
       </nav>
       <div class="container mt-5">
-          <form action="analyze" method="GET">
+          <form action="analyze" method="POST">
+            {% csrf_token %}
             <div class="form-group">
                 <h4><label for="textarea">Enter your text here!</label></h4>
                 <textarea class="form-control" name="text" id="textarea" rows="8"></textarea>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" name="choice" value='removepunc' class="custom-control-input" id="customSwitch1">
+                <input type="checkbox" name="removepunc" class="custom-control-input" id="customSwitch1">
                 <label class="custom-control-label" for="customSwitch1">Remove Punctutations</label>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" name="choice" value='uppercase' class="custom-control-input" id="customSwitch2">
+                <input type="checkbox" name="uppercase" class="custom-control-input" id="customSwitch2">
                 <label class="custom-control-label" for="customSwitch2">UPPERCASE</label>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" name="choice" value='removespace' class="custom-control-input" id="customSwitch3">
+                <input type="checkbox" name="removespace" class="custom-control-input" id="customSwitch3">
                 <label class="custom-control-label" for="customSwitch3">Remove Extra Spaces</label>
             </div>
             <div class="custom-control custom-switch">
-                <input type="checkbox" name="choice" value='charcount' class="custom-control-input" id="customSwitch4">
+                <input type="checkbox" name="charcount" class="custom-control-input" id="customSwitch4">
                 <label class="custom-control-label" for="customSwitch4">Count Characters</label>
             </div>
             <button type="submit" class="btn btn-outline-secondary mt-4">Analyze Text</button>
